@@ -11,7 +11,7 @@ def read(relative_path):
     return lines
 
 
-def solve(lines):
+def solve1(lines):
     count = 0
     for i in range(len(lines) - 1):
         current = lines[i]
@@ -22,10 +22,27 @@ def solve(lines):
     return count
 
 
+def solve2(lines):
+    count = 0
+    last_sum = 10 ** 3
+    for i in range(len(lines) - 2):
+        current_sum = lines[i] + lines[i+1] + lines[i+2]
+        if i < 3:
+            print(i)
+            print(current_sum)
+        if current_sum > last_sum:
+            count += 1
+        last_sum = current_sum
+    return count
+
+
 if __name__ == '__main__':
     name = os.path.basename(__file__).split('.py')[0]
     print(f"Solving {name} for advent of code")
 
     lines = read('inputs/day1.txt')
-    result = solve(lines)
-    print(f"Result: {result}")
+    result1 = solve1(lines)
+    print(f"Result: {result1}")
+
+    result2 = solve2(lines)
+    print(f"Result: {result2}")
