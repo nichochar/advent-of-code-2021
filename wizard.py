@@ -5,14 +5,24 @@ import os
 import stat
 
 
-BOILERPLATE = """
+BOILERPLATE = r"""
 #!/usr/bin/env python3
 import os
+
+
+def read(relative_filepath):
+    with open(relative_filepath, 'r+') as f:
+        data = f.read()
+        clean_data = data.strip()
+        lines = clean_data.split('\n')
+
+    return lines
 
 
 if __name__ == '__main__':
     name = os.path.basename(__file__).split('.py')[0]
     print(f"Solving {name} for advent of code")
+    data = read('inputs/{name}.txt')
 """.strip()
 
 
